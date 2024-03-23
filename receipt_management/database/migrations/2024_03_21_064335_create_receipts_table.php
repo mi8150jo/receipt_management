@@ -19,7 +19,7 @@ class CreateReceiptsTable extends Migration
             $table->float('length');
 
             // 外部キー
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('user_id')->default(1);
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
             $table->timestamps();
