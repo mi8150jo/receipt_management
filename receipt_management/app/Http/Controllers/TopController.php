@@ -8,6 +8,10 @@ class TopController extends Controller
 {
     public function index()
     {
-        return view('top');
+        $machines = \Auth::user()->user_to_machine()->get();
+        $data = [
+            'machines' => $machines,
+        ];
+        return view('top', $data);
     }
 }

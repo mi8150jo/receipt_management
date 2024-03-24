@@ -48,7 +48,7 @@ class User extends Authenticatable
     }
 
     public function user_to_machine(){
-        return $this->belongsToMany(Machines::class, 'machine_user_relation', 'user_id', 'machine_id');
+        return $this->belongsToMany(Machines::class, 'machine_user_relations', 'user_id', 'machine_id');
     }
 
 }

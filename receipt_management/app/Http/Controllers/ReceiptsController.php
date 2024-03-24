@@ -42,6 +42,7 @@ class ReceiptsController extends Controller
 
         $receipt = new Receipts();
         $receipt->length = $request->length;
+        $receipt->user_id = \Auth::id();
         $receipt->save();
 
         return redirect(route('top'));
