@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Receipts;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ReceiptsController extends Controller
@@ -24,7 +25,11 @@ class ReceiptsController extends Controller
      */
     public function create()
     {
-        return view('receipt.create');
+        $receipts = \Auth::user()->receipts()->get();
+        $data = [
+            'receipts' => $receipts,
+        ];
+        return view('receipt.create', $data);
     }
 
     /**

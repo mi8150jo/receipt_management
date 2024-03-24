@@ -4,7 +4,7 @@
 <h3 class="mb-3">{{ \Auth::user()->name }}店</h3>
 <div class="col">
     <div class="alert alert-secondary d-flex justify-content-between align-items-center">
-        <div>レシートの平均長さ：{{ App\Models\Receipts::avg('length') }}</div>
+        <div>レシートの平均長さ：{{ number_format(\Auth::user()->receipts()->avg('length'), 1) }}cm</div>
         <div>
             <a class="btn btn-sm btn-success" href="{{ route('receipt.create') }}">レシートの登録</a>
             <a class="btn btn-sm btn-success" href="{{ route('machine.create') }}">機械の登録</a>
@@ -23,12 +23,25 @@
                         <button type="submit" class="btn btn-danger btn-sm">削除</button>
                     </form>
                 </div>
+                @if($machine->remaining_length <= 100)
                 <div class="card-body">
-
+                    <p class="card-text text-danger">レシートの残量：{{ $machine->remaining_length }}cm</p>
+                    <p class="card-text">発行回数：{{ $machine->issue_count }}回</p>
+                    <p class="card-text">累計発行回数：{{ $machine->total_issue_count }}回</p>
+                </div>
+                @elseif($machine->remaining_length <= 500)
+                <div class="card-body">
+                    <p class="card-text text-warning">レシートの残量：{{ $machine->remaining_length }}cm</p>
+                    <p class="card-text">発行回数：{{ $machine->issue_count }}回</p>
+                    <p class="card-text">累計発行回数：{{ $machine->total_issue_count }}回</p>
+                </div>
+                @else
+                <div class="card-body">
                     <p class="card-text">レシートの残量：{{ $machine->remaining_length }}cm</p>
                     <p class="card-text">発行回数：{{ $machine->issue_count }}回</p>
                     <p class="card-text">累計発行回数：{{ $machine->total_issue_count }}回</p>
                 </div>
+                @endif
 
                 <div class="card-footer d-flex justify-content-between">
                     <form action="{{ route('machine.increment', $machine) }}" method="post" class="mr-2">

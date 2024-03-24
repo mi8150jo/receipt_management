@@ -42,9 +42,12 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function machines()
-    {
+    public function machines(){
         return $this->hasMany(machine_user_relation::class);
+    }
+
+    public function receipts(){
+        return $this->hasMany(Receipts::class);
     }
 
     public function user_to_machine(){

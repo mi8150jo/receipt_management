@@ -20,7 +20,6 @@
                 @csrf 
                 <button type="submit">ログアウト</button>
             </form>
-            <a href="{{ route('welcome') }}" class="navbar-brand">ホームに戻る</a>
         </div>
     </header>
     <div class="container py-4">
