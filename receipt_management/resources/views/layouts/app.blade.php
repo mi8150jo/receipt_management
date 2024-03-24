@@ -16,6 +16,10 @@
     <header class="navbar navbar-dark bg-dark">
         <div class="container">
             <a href="/receipt_management" class="navbar-brand">{{ config("app.name") }}</a>
+            <form action="{{ route('logout') }}" method="post">
+                @csrf 
+                <button type="submit">ログアウト</button>
+            </form>
             <a href="{{ route('welcome') }}" class="navbar-brand">ホームに戻る</a>
         </div>
     </header>

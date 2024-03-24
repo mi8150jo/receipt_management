@@ -21,8 +21,9 @@ Route::get('receipt_management/machine_create', [MachinesController::class, 'cre
 // 機械の情報をデータベースにポストするルーティング
 Route::post('receipt_management/machine_store', [MachinesController::class, 'store'])->name('machine.store');
 
-// 発行回数を増やす処理へルーティング
-Route::post('receipt_management/{machine}/counter', [MachinesController::class, 'counter'])->name('machine.counter');
+// 発行回数の増減へルーティング
+Route::post('receipt_management/{machine}/increment', [MachinesController::class, 'increment'])->name('machine.increment');
+Route::post('receipt_management/{machine}/decrement', [MachinesController::class, 'decrement'])->name('machine.decrement');
 // リセットのルーティング
 Route::post('receipt_management/{machine}/reset', [MachinesController::class, 'reset'])->name('machine.reset');
 // 削除のルーティング

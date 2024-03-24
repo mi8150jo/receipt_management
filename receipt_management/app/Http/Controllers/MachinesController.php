@@ -49,6 +49,7 @@ class MachinesController extends Controller
             $machine->remaining_length = 6400;
         }else{
             $machine->remaining_length = $request->remaining_length;
+            $machine->initial_remaining_length = $request->remaining_length;
         }
 
         $machine->save();
@@ -61,12 +62,12 @@ class MachinesController extends Controller
         return redirect(route('top'));
     }
 
-    public function counter(Machines $machine)
+    public function increment(Machines $machine)
     {
-        // 発行回数を+1増やす
+        // 発行回数を+1
         $machine->increment('issue_count');
 
-         // receiptテーブルのlengthの平均値を取得する
+        // receiptテーブルのlengthの平均値を取得する
         $averageLength = Receipts::avg('length');
 
         $machine->remaining_length -= $averageLength;
@@ -75,6 +76,26 @@ class MachinesController extends Controller
         return redirect(route('top'));
     }
 
+    public function decrement(Machines $machine)
+    {
+        // 発行回数が0の時デクリメントできないようにリダイレクトする
+        if ($machine->issue_count == 0){
+            return redirect(route('top'));
+        }
+
+        // 発行回数を-1
+        $machine->decrement('issue_count');
+
+        // receiptテーブルのlengthの平均値を取得する
+        $averageLength = Receipts::avg('length');
+
+        $machine->remaining_length += $averageLength;
+        $machine->save();
+
+        return redirect(route('top'));
+    }
+    
+
     public function reset(Machines $machine)
     {
         // 累計発行回数に発行回数を追加
@@ -82,7 +103,7 @@ class MachinesController extends Controller
 
         // 初期値にリセット
         $machine->issue_count = 0;
-        $machine->remaining_length = 6400;
+        $machine->remaining_length = $machine->initial_remaining_length;
         $machine->save();
         
         return redirect(route('top'));
