@@ -4,7 +4,7 @@
 <h3 class="mb-3">{{ \Auth::user()->name }}店</h3>
 <div class="col">
     <div class="alert alert-secondary d-flex justify-content-between align-items-center">
-        <div>レシートの平均長さ：{{ number_format(\Auth::user()->receipts()->avg('length'), 1) }}cm</div>
+        <div>レシートの総消費量：{{ $receipt_consumption }}cm, {{ $receipt_consumption_meters }}m, {{ $receipt_consumption_kilometers }}km</div>
         <div>
             <a class="btn btn-sm btn-success" href="{{ route('receipt.create') }}">レシートの登録</a>
             <a class="btn btn-sm btn-success" href="{{ route('machine.create') }}">機械の登録</a>
