@@ -1,0 +1,22 @@
+/* .welcome {
+    margin: 30px auto;
+    padding: 30px;
+    border-radius: 6px;
+    background: #34495e;
+    text-align: center;
+    color: #fff;
+} */
+
+.welcome {
+    text-align: center;
+    margin: 80px auto;
+    padding: 50px;
+    background: #34495e;
+    border-radius: 6px;
+}
+
+.welcome h1 {
+    font-size: 36px;
+    color: white; /* ヘッダーの色を設定 */
+    margin-bottom: 30px; /* 下部マージンを調整 */
+}

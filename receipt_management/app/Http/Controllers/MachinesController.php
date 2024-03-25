@@ -68,7 +68,7 @@ class MachinesController extends Controller
         $machine->increment('issue_count');
 
         // receiptテーブルのlengthの平均値を取得する
-        $averageLength = Receipts::avg('length');
+        $averageLength = \Auth::user()->receipts()->avg('length');
 
         $machine->remaining_length -= $averageLength;
         $machine->save();
@@ -87,7 +87,7 @@ class MachinesController extends Controller
         $machine->decrement('issue_count');
 
         // receiptテーブルのlengthの平均値を取得する
-        $averageLength = Receipts::avg('length');
+        $averageLength = \Auth::user()->receipts()->avg('length');
 
         $machine->remaining_length += $averageLength;
         $machine->save();
