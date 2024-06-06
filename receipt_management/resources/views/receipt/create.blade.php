@@ -34,7 +34,11 @@
                 </tr>
                 @endforeach
             </tbody>
+            
         </table>
+        <!-- ページネーション -->
+        {{ $receipts->links() }}
+        
     </div>
 </div>
 

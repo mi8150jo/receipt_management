@@ -25,7 +25,7 @@ class ReceiptsController extends Controller
      */
     public function create()
     {
-        $receipts = \Auth::user()->receipts()->get();
+        $receipts = \Auth::user()->receipts()->paginate(20);
         $data = [
             'receipts' => $receipts,
         ];

@@ -5,6 +5,10 @@ use Laravel\Fortify\Features;
 
 return [
 
+    'redirects' => [
+        'logout' => config('app.url')
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | Fortify Guard
